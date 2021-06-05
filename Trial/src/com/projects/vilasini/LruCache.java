@@ -1,8 +1,7 @@
 package com.projects.vilasini;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.sql.SQLOutput;
+import java.util.*;
 
 //Try to implement a cache with capacity N. Each (key,value) pair should have a freshness value
 
@@ -95,6 +94,7 @@ public class LruCache {
                 }
             }
         }
+        printCache();
         return value;
     }
 
@@ -102,4 +102,15 @@ public class LruCache {
         Item item = new Item(key, value, capacity);
         itemsList.add(item);
     }
+    private void printCache() {
+        Collections.sort(itemsList, new SortByFreshnessValue());
+        //Collections.sort(itemsList);
+        System.out.println("----------------Items in the List---------------------\n");
+        System.out.println("[Freshness: Key: Value]");
+        for (Item item : itemsList) {
+            System.out.print("[ " + item.getFreshnessValue()  + " : " + item.getKey() + " : " + item.getValue() + " ]  ");
+        }
+        System.out.println();
+    }
+
 }
